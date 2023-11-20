@@ -7,7 +7,8 @@
       "email": "carlos@gmail.com",
       "titulo": "Reclamo por velocidad de carga de la web.",
       "mensaje": "Quiero reclamar por la velocidad de carga de la web principal.",
-      "estado": "Pendiente"
+      "estado": "Pendiente",
+      "respuesta": ""
     },
     {
       "id": "f80cb00d",
@@ -16,7 +17,8 @@
       "email": "jose@gmail.com",
       "titulo": "Reclamo por un producto que no llegó",
       "mensaje": "Compré hace 2 días y el producto no ha llegado.",
-      "estado": "Pendiente"
+      "estado": "Pendiente",
+      "respuesta": ""
     },
     {
       "id": "2477fdd9",
@@ -25,7 +27,38 @@
       "email": "miguel@gmail.com",
       "titulo": "Quiero reclamar por los puntos.",
       "mensaje": "no se me ven reflejados los puntos en el perfil.",
-      "estado": "Pendiente"
+      "estado": "Pendiente",
+      "respuesta": ""
+    },
+    {
+      "id": "a4267eed",
+      "fecha": "20-11-2023 11:51 am",
+      "autor": "Marta García",
+      "email": "marta@gmail.com",
+      "titulo": "Quiero reclamar por los puntos.",
+      "mensaje": "no se me ven reflejados los puntos en el perfil.",
+      "estado": "Pendiente",
+      "respuesta": ""
+    },
+    {
+      "id": "efbfd7d7",
+      "fecha": "20-11-2023 12:30 pm",
+      "autor": "Pepito Palote",
+      "email": "pepito@gmail.com",
+      "titulo": "Reclamo por producto en mal estado.",
+      "mensaje": "Ayer me llegó un producto roto.",
+      "estado": "Pendiente",
+      "respuesta": ""
+    },
+    {
+      "id": "a6e560f9",
+      "fecha": "20-11-2023 12:31 pm",
+      "autor": "Nelson Ramírez",
+      "email": "nelson@gmail.com",
+      "titulo": "Reclamo por lentitud del servicio",
+      "mensaje": "...",
+      "estado": "Pendiente",
+      "respuesta": ""
     }
   ]
 }

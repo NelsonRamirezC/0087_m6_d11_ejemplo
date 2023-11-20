@@ -1,0 +1,75 @@
+<section>
+    <h1 class="text-center py-3">Página reclamos</h1>
+</section>
+<section>
+    <h3 class="text-center">Formulario de reclamos</h3>
+
+    <div class="col-12 col-md-6 mx-auto">
+        <form id="formReclamo">
+            <div class="mb-3">
+                <label for="reclamoAutor" class="form-label">Autor:</label>
+                <input class="form-control" type="text" name="autor" id="reclamoAutor" required>
+            </div>
+        
+            <div class="mb-3">
+                <label for="reclamoEmail" class="form-label">Email:</label>
+                <input class="form-control" type="email" name="email" id="reclamoEmail" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="reclamoTitulo" class="form-label">Titulo:</label>
+                <input class="form-control" type="text" name="titulo" id="reclamoTitulo" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="reclamoMensaje" class="form-label">Mensaje:</label>
+                <textarea name="mensaje" id="reclamoMensaje" rows="5" class="form-control"></textarea>
+            </div>
+
+            <input type="submit" class="btn btn-primary">
+        </form>
+    </div>
+</section>
+
+
+<script>
+    const formReclamo = document.getElementById("formReclamo");
+
+    formReclamo.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        
+        const myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+
+        const raw = JSON.stringify({
+            "autor": reclamoAutor.value,
+            "email": reclamoEmail.value,
+            "titulo": reclamoTitulo.value,
+            "mensaje": reclamoMensaje.value
+        });
+
+       const requestOptions = {
+            method: 'POST',
+            headers: myHeaders,
+            body: raw,
+        };
+
+        try{
+
+            let response = await fetch("/api/reclamos", requestOptions);
+            let data = await response.json();
+
+            if(data.code == 201){
+                alert("Reclamo realizado con éxito\nID Reclamo: "+ data.reclamo.id);
+                formReclamo.reset();
+            }else{
+                alert("Error al crear el reclamo.")
+            }
+
+        }catch(error){
+            console.log(error);
+            alert("Algo ha salido mal al realizar el reclamo.")
+        }
+
+    })
+</script>
