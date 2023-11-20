@@ -1,0 +1,13 @@
+{
+    "registros": [
+        {
+            "id": 1,
+            "fecha": "2023-11-20",
+            "autor": "Carlos Pereira",
+            "email": "carlos@gmail.com",
+            "titulo": "Reclamo por velocidad de carga de la web.",
+            "mensaje": "Quiero reclamar por la velocidad de carga de la web principal.",
+            "estado": "Pendiente"
+        }
+    ]
+}

@@ -1,10 +1,24 @@
 const express = require("express");
+const fs = require("fs/promises");
 
 const app = express();
 
+const leerReclamos = async () => {
+    let reclamos = await fs.readFile(__dirname+"/data/reclamos.json", "utf8");
+
+    //JSON.parse transforma el JSON a un objeto JavaScript
+    reclamos = JSON.parse(reclamos);
+
+    return reclamos;
+
+
+
+}
+
 //ENDPOINTS DE LA API
-app.get("/api/reclamos", (req, res) => {
-    res.status(200).json({code: 200, message: "Listado de reclamos"});
+app.get("/api/reclamos", async (req, res) => {
+    let reclamos = await leerReclamos();
+    res.status(200).json({code: 200, message: "Listado de reclamos", reclamos: reclamos.registros});
 })
 
 
