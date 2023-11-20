@@ -56,6 +56,23 @@ app.get("/reclamos", (req, res) => {
     res.render("reclamos");
 });
 
+//PÁGINA RECLAMOS CON FILTRO POR ID
+app.get("/reclamos/:id", (req, res) => {
+    let {id} = req.params;
+    console.log(id);
+    res.render("detalleReclamo");
+});
+
+//PÁGINA DASHBOARD RECLAMOS
+app.get("/dashboard/reclamos", async (req, res) => {
+    let reclamos = await leerReclamos();
+
+    res.render("dashboardReclamos", {
+        reclamos: reclamos.registros
+    });
+});
+
+
 
 
 //ENDPOINTS DE LA API

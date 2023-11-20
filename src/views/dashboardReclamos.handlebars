@@ -1,0 +1,30 @@
+<section>
+    <h1 class="text-center py-3">Panel de control de reclamos</h1>
+</section>
+
+<section class="py-3">
+    <h2>Listado de reclamos:</h2>
+
+    <div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Autor</th>
+                    <th scope="col">Titulo</th>
+                    <th scope="col">Detalles</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each reclamos}}
+                    <tr>
+                        <th scope="row">{{id}}</th>
+                        <td>{{autor}}</td>
+                        <td>{{titulo}}</td>
+                        <td><a class="btn btn-info" href="/reclamos/{{id}}" target="_blank">Detalles</a></td>
+                    </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+</section>
