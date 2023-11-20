@@ -1,13 +1,31 @@
 {
-    "registros": [
-        {
-            "id": 1,
-            "fecha": "2023-11-20",
-            "autor": "Carlos Pereira",
-            "email": "carlos@gmail.com",
-            "titulo": "Reclamo por velocidad de carga de la web.",
-            "mensaje": "Quiero reclamar por la velocidad de carga de la web principal.",
-            "estado": "Pendiente"
-        }
-    ]
+  "registros": [
+    {
+      "id": 1,
+      "fecha": "2023-11-20",
+      "autor": "Carlos Pereira",
+      "email": "carlos@gmail.com",
+      "titulo": "Reclamo por velocidad de carga de la web.",
+      "mensaje": "Quiero reclamar por la velocidad de carga de la web principal.",
+      "estado": "Pendiente"
+    },
+    {
+      "id": "f80cb00d",
+      "fecha": "20-11-2023 11:40 am",
+      "autor": "José Soto",
+      "email": "jose@gmail.com",
+      "titulo": "Reclamo por un producto que no llegó",
+      "mensaje": "Compré hace 2 días y el producto no ha llegado.",
+      "estado": "Pendiente"
+    },
+    {
+      "id": "2477fdd9",
+      "fecha": "20-11-2023 11:41 am",
+      "autor": "Miguel García",
+      "email": "miguel@gmail.com",
+      "titulo": "Quiero reclamar por los puntos.",
+      "mensaje": "no se me ven reflejados los puntos en el perfil.",
+      "estado": "Pendiente"
+    }
+  ]
 }
