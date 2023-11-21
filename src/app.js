@@ -61,15 +61,29 @@ const editarReclamo = async (reclamo) => {
     await fs.writeFile(__dirname+"/data/reclamos.json", JSON.stringify(reclamos, null, 2), "utf8");
 }
 
+
+
+const eliminarReclamo = async (id) => {
+    let reclamos = await leerReclamos();
+
+    reclamos.registros = reclamos.registros.filter(reclamo => reclamo.id != id);
+    
+    await fs.writeFile(__dirname+"/data/reclamos.json", JSON.stringify(reclamos, null, 2), "utf8");
+}
+
 //RUTAS PARA VISTAS
 //PÁGINA PRINCIPAL
 app.get(["/", "/home"], (req, res) => {
-    res.render("home");
+    res.render("home", {
+        homeView: true
+    });
 });
 
 //PÁGINA RECLAMOS
 app.get("/reclamos", (req, res) => {
-    res.render("reclamos");
+    res.render("reclamos", {
+        reclamosView: true
+    });
 });
 
 //PÁGINA RECLAMOS CON FILTRO POR ID
@@ -81,15 +95,16 @@ app.get("/reclamos/:id", async (req, res) => {
 
     if(reclamoFind){
         res.render("detalleReclamo", {
-            reclamo: reclamoFind
+            reclamo: reclamoFind,
+            dashboardView: true
         });
     }else{
         res.render("detalleReclamo", {
-            error: "No se encuentra el reclamo indicado."
+            error: "No se encuentra el reclamo indicado.",
+            dashboardView: true
         });
     }
-
-    
+  
 });
 
 //PÁGINA DASHBOARD RECLAMOS
@@ -97,9 +112,11 @@ app.get("/dashboard/reclamos", async (req, res) => {
     let reclamos = await leerReclamos();
 
     res.render("dashboardReclamos", {
-        reclamos: reclamos.registros
+        reclamos: reclamos.registros,
+        dashboardView: true
     });
 });
+
 
 
 
@@ -147,8 +164,36 @@ app.put("/api/reclamos", async (req, res) => {
     }else {
         res.status(404).json({code: 404, message: "ID de reclamo no encontrado."});
     }
+});
 
-})
+const validarExistenciaReclamo = async (req, res, next) => {
+    let reclamos = await leerReclamos();
+    let {id} = req.query;
+
+    let reclamoFind = reclamos.registros.find(reclamo => reclamo.id == id);
+
+    if(reclamoFind){
+        if(reclamoFind.estado.toLowerCase() == "finalizado"){
+            req.reclamo = reclamoFind;
+          next();  
+        }else {
+            res.status(400).json({code: 400, message: "El reclamo que intenta eliminar no ha finalizado."});
+        }
+        
+    }
+    else{
+        res.status(404).json({code: 404, message: "ID de reclamo no encontrado."});
+    }
+};
+
+//ENDPOINT ELIMINAR RECLAMOS FINALIZADOS CON MIDDLEWARE
+app.delete("/api/reclamos", validarExistenciaReclamo, async (req, res) => {
+    let { id } = req.reclamo;
+    
+    await eliminarReclamo(id);
+
+    res.status(200).json({code: 200, message: "Reclamo eliminado con éxito."})
+});
 
 
 

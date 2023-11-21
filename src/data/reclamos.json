@@ -1,16 +1,6 @@
 {
   "registros": [
     {
-      "id": 1,
-      "fecha": "2023-11-20",
-      "autor": "Carlos Pereira",
-      "email": "carlos@gmail.com",
-      "titulo": "Reclamo por velocidad de carga de la web.",
-      "mensaje": "Quiero reclamar por la velocidad de carga de la web principal.",
-      "estado": "Finalizado",
-      "respuesta": "Se solucionó de manera interna con el cliente."
-    },
-    {
       "id": "f80cb00d",
       "fecha": "20-11-2023 11:40 am",
       "autor": "José Soto",
@@ -39,26 +29,6 @@
       "mensaje": "no se me ven reflejados los puntos en el perfil.",
       "estado": "Pendiente",
       "respuesta": ""
-    },
-    {
-      "id": "efbfd7d7",
-      "fecha": "20-11-2023 12:30 pm",
-      "autor": "Pepito Palote",
-      "email": "pepito@gmail.com",
-      "titulo": "Reclamo por producto en mal estado.",
-      "mensaje": "Ayer me llegó un producto roto.",
-      "estado": "Pendiente",
-      "respuesta": ""
-    },
-    {
-      "id": "a6e560f9",
-      "fecha": "20-11-2023 12:31 pm",
-      "autor": "Nelson Ramírez",
-      "email": "nelson@gmail.com",
-      "titulo": "Reclamo por lentitud del servicio",
-      "mensaje": "...",
-      "estado": "Finalizado",
-      "respuesta": "Se tomó contacto con cliente para entender solucitud, pero fue un error."
     }
   ]
 }
