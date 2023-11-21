@@ -1,3 +1,108 @@
 <section>
-    <h1 class="text-center py-3">Detalle Reclamo</h1>
+    <h1 class="text-center py-3">Detalle Reclamo:</h1>
 </section>
+
+<section class="col-12 col-md-6 mx-auto">
+    {{#if error}}
+    <h2 class="text-cent py-3">El reclamo buscado no existe en el sistema.</h2>
+
+    {{else}}
+
+    <form id="formUpdateReclamo">
+       {{!--  ID FORMULARIO --}}
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">ID</span>
+            <input id="reclamoId" type="text" class="form-control" aria-label="ID" aria-describedby="basic-addon1" name="id" value="{{reclamo.id}}" disabled>
+        </div>
+
+        {{!-- FECHA RECLAMO --}}
+
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">Fecha reclamo</span>
+            <input type="text" class="form-control" aria-label="Fecha" aria-describedby="basic-addon1" name="fecha" value="{{reclamo.fecha}}" disabled>
+        </div>
+
+        {{!-- AUTOR FORMULARIO --}}
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">Autor</span>
+            <input type="text" class="form-control" aria-label="Autor" aria-describedby="basic-addon1" name="autor" value="{{reclamo.autor}}" disabled>
+        </div>
+
+        {{!-- EMAIL RECLAMO--}}
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">Email</span>
+            <input type="text" class="form-control" aria-label="email" aria-describedby="basic-addon1" name="email" value="{{reclamo.email}}" disabled>
+        </div>
+
+        {{!-- TITULO RECLAMO --}}
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">Titulo</span>
+            <input type="text" class="form-control" aria-label="Titulo" aria-describedby="basic-addon1" name="titulo" value="{{reclamo.titulo}}" disabled>
+        </div>
+
+        {{!-- ESTADO RECLAMO--}}
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">Estado</span>
+            <input id="reclamoEstado" type="text" class="form-control" aria-label="Estado" aria-describedby="basic-addon1" name="estado" value="{{reclamo.estado}}">
+        </div>
+
+        {{!-- MENSAJE RECLAMO --}}
+
+        <div class="input-group mb-3">
+            <span class="input-group-text">Reclamo</span>
+            <textarea class="form-control" aria-label="Mensaje reclamo" name="mensaje" disabled>{{reclamo.mensaje}}</textarea>
+        </div>
+
+        {{!-- RESPUESTA RECLAMO --}}
+
+        <div class="input-group mb-3">
+            <span class="input-group-text">Respuesta</span>
+            <textarea id="reclamoRespuesta" class="form-control" aria-label="Respuesta reclamo" name="respuesta">{{reclamo.respuesta}}</textarea>
+        </div>
+        <input type="submit" class="btn btn-primary" value="Guardar">
+
+    </form>
+
+
+    {{/if}}
+</section>
+
+<script>
+
+    const formUpdateReclamo = document.getElementById("formUpdateReclamo");
+
+    formUpdateReclamo.addEventListener("submit", async (event) => {
+        event.preventDefault();
+
+        const myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+
+        const raw = JSON.stringify({
+            "id": reclamoId.value,
+            "estado": reclamoEstado.value,
+            "respuesta": reclamoRespuesta.value
+        });
+
+        console.log(raw);
+
+        const requestOptions = {
+            method: 'PUT',
+            headers: myHeaders,
+            body: raw,
+            redirect: 'follow'
+        };
+
+        let response = await fetch("/api/reclamos", requestOptions);
+
+        let data = await response.json();
+
+        if(data.code == 201){
+            alert(data.message);
+            location.reload();
+        }else{
+            alert("Error: "+ data.message);
+        }
+    })
+    
+
+</script>

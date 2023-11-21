@@ -7,8 +7,8 @@
       "email": "carlos@gmail.com",
       "titulo": "Reclamo por velocidad de carga de la web.",
       "mensaje": "Quiero reclamar por la velocidad de carga de la web principal.",
-      "estado": "Pendiente",
-      "respuesta": ""
+      "estado": "Finalizado",
+      "respuesta": "Se solucionó de manera interna con el cliente."
     },
     {
       "id": "f80cb00d",
@@ -17,7 +17,7 @@
       "email": "jose@gmail.com",
       "titulo": "Reclamo por un producto que no llegó",
       "mensaje": "Compré hace 2 días y el producto no ha llegado.",
-      "estado": "Pendiente",
+      "estado": "Asignado con ticket 2",
       "respuesta": ""
     },
     {
@@ -27,7 +27,7 @@
       "email": "miguel@gmail.com",
       "titulo": "Quiero reclamar por los puntos.",
       "mensaje": "no se me ven reflejados los puntos en el perfil.",
-      "estado": "Pendiente",
+      "estado": "Asignado con ticket 2",
       "respuesta": ""
     },
     {
@@ -57,8 +57,8 @@
       "email": "nelson@gmail.com",
       "titulo": "Reclamo por lentitud del servicio",
       "mensaje": "...",
-      "estado": "Pendiente",
-      "respuesta": ""
+      "estado": "Finalizado",
+      "respuesta": "Se tomó contacto con cliente para entender solucitud, pero fue un error."
     }
   ]
 }

@@ -9,7 +9,8 @@ const path = require("path");
 
 const app = express();
 
-app.use(cors()); //acepta peticiones de origines cruzados
+//CONFIGURACIÓN DE MIDDLEWARES
+app.use(cors()); //acepta peticiones de origenes cruzados
 
 app.use(express.json()); //guarda los datos en req.body
 
@@ -45,6 +46,21 @@ const agregarReclamo = async (reclamo) => {
 }
 
 
+const editarReclamo = async (reclamo) => {
+    let reclamos = await leerReclamos();
+
+    reclamos.registros = reclamos.registros.map(element => {
+        if(element.id == reclamo.id){
+            element.estado = reclamo.estado;
+            element.respuesta = reclamo.respuesta;
+        }
+        return element
+    })
+    
+
+    await fs.writeFile(__dirname+"/data/reclamos.json", JSON.stringify(reclamos, null, 2), "utf8");
+}
+
 //RUTAS PARA VISTAS
 //PÁGINA PRINCIPAL
 app.get(["/", "/home"], (req, res) => {
@@ -57,10 +73,23 @@ app.get("/reclamos", (req, res) => {
 });
 
 //PÁGINA RECLAMOS CON FILTRO POR ID
-app.get("/reclamos/:id", (req, res) => {
+app.get("/reclamos/:id", async (req, res) => {
     let {id} = req.params;
-    console.log(id);
-    res.render("detalleReclamo");
+    let reclamos = await leerReclamos();
+
+    let reclamoFind = reclamos.registros.find(reclamo => reclamo.id == id);
+
+    if(reclamoFind){
+        res.render("detalleReclamo", {
+            reclamo: reclamoFind
+        });
+    }else{
+        res.render("detalleReclamo", {
+            error: "No se encuentra el reclamo indicado."
+        });
+    }
+
+    
 });
 
 //PÁGINA DASHBOARD RECLAMOS
@@ -80,7 +109,7 @@ app.get("/dashboard/reclamos", async (req, res) => {
 //ENDPOINT LEER RECLAMOS
 app.get("/api/reclamos", async (req, res) => {
     let reclamos = await leerReclamos();
-    res.status(200).json({code: 200, message: "Listado de reclamos", reclamos: reclamos.registros});
+    res.json({code: 200, message: "Listado de reclamos", reclamos: reclamos.registros});
 });
 
 //ENDPOINT QUE PERMITE CREAR CREAMOS
@@ -102,6 +131,25 @@ app.post("/api/reclamos", async (req, res) => {
 
     res.status(201).json({code: 201, message: "Reclamo creado correctamente.", reclamo: nuevoReclamo})
 });
+
+//RUTA PARA ACTUALIZAR RECLAMOS CON UN ESTADO Y RESPUESTA
+app.put("/api/reclamos", async (req, res) => {
+    let {id, estado, respuesta} = req.body;
+    let reclamos = await leerReclamos();
+
+    let reclamoFind = reclamos.registros.find(reclamo => reclamo.id == id);
+
+    if(reclamoFind){
+        reclamoFind.estado = estado;
+        reclamoFind.respuesta = respuesta;
+        await editarReclamo(reclamoFind);
+        res.status(201).json({code: 201, message: "Reclamo actualizado con éxito."})
+    }else {
+        res.status(404).json({code: 404, message: "ID de reclamo no encontrado."});
+    }
+
+})
+
 
 
 //RUTA COMODÍN -> CUANDO LA RUTA DE CONSULTA NO COINCIDA CON NINGUNA OTRA
